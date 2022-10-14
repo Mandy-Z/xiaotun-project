@@ -1,0 +1,52 @@
+class Node():
+    def __init__(self,val):
+        self.val=val
+        self.leftval= None
+        self.rightval= None
+        
+    def add_child(self,val):
+        if val == self.val:
+            
+            return
+        if val < self.val:
+            if self.leftval:
+                self.leftval.add_child(val)
+            else:
+                self.leftval = Node(val)
+        else:
+            if self.rightval:
+                self.rightval.add_child(val)
+            else:
+                self.rightval = Node(val)
+    
+    def order_travel(self):
+        elems=[]
+        
+        if self.leftval:
+            elems += self.leftval.order_travel()
+        
+        elems.append(self.val)
+        
+        if self.rightval:
+            
+            elems += self.rightval.order_travel()
+            
+        return elems
+    
+    def build_tree(elems):
+        root=Node(elems[0])
+        
+        for i in range (1,len(elems)):
+            root.add_child(elems[i])
+        
+        return root
+    
+    if __name__=='__main__':
+        
+        numbers=[17,12,1,4,6,8,3]
+        numbers_tree=build_tree(numbers)
+        
+        print(numbers_tree.order_travel())
+    
+    
+        
